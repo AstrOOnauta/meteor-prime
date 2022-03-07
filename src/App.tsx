@@ -1,10 +1,16 @@
 import React from 'react'
-import {View, Text} from 'react-native'
+import 'react-native-gesture-handler'
+import {StatusBar} from 'react-native'
+
+import {NavigationContainer} from '@react-navigation/native'
+
+import Routes from './components/navigations'
 
 export default function App() {
   return (
-    <View style={{margin: 140}}>
-      <Text style={{fontSize: 20}}>Hello World!</Text>
-    </View>
+    <NavigationContainer>
+      <StatusBar hidden={true} />
+      <Routes />
+    </NavigationContainer>
   )
 }
