@@ -4,11 +4,12 @@ export const SliderItemContainer = styled.TouchableOpacity`
   padding: 14px 14px 14px 0;
 `
 export const BannerItem = styled.Image`
-  width: 100%;
+  width: 100px;
   height: 150px;
-  border-radius: 6px;
+  border-radius: 4px;
 `
 export const Title = styled.Text`
+  width: 100px;
   color: #ffffff;
   font-size: 14px;
 `

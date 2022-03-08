@@ -8,19 +8,26 @@ import {
   SliderItemContainer,
   Title,
 } from './style'
+import {MoviesResults} from '../../../types/movies'
+import {imageURL} from '../../../services/api'
 
-export default function SliderItem() {
+export interface SliderItemProps {
+  data: MoviesResults
+}
+
+export default function SliderItem(props: SliderItemProps) {
   return (
-    <SliderItemContainer activeOpacity={1}>
+    <SliderItemContainer activeOpacity={0.8}>
       <BannerItem
+        resizeMethod="resize"
         source={{
-          uri: 'https://images.unsplash.com/photo-1605294965592-eb6e54b215d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80',
+          uri: `${imageURL}${props.data.poster_path}`,
         }}
       />
-      <Title numberOfLines={1}>IT CHAPTER II</Title>
+      <Title numberOfLines={1}>{props.data.title}</Title>
       <RateContainer>
         <Ionicons name="md-star" size={12} color="#FFCD3C" />
-        <Rate>9/10</Rate>
+        <Rate>{props.data.vote_average}/10</Rate>
       </RateContainer>
     </SliderItemContainer>
   )
