@@ -1,17 +1,22 @@
 import React, {useState, useEffect} from 'react'
-import {Text, ScrollView} from 'react-native'
+import {ScrollView, ActivityIndicator} from 'react-native'
+import {useNavigation} from '@react-navigation/native'
 
 import {Banner, BannerButton, HomeContainer, SliderMovies, Title} from './style'
 import Header from '../../uis/Header'
 import SearchBar from '../../uis/SearchBar'
 import SliderItem from '../../uis/SliderItem'
-import api, {key} from '../../../services/api'
+import api, {imageURL, key} from '../../../services/api'
 import {MoviesResults} from '../../../types/movies'
 
 export default function Home() {
+  const [loading, setLoading] = useState<boolean>(true)
+  const [bannerMovie, setBannerMovie] = useState<number>(0)
   const [nowMovies, setNowMovies] = useState<MoviesResults | []>([])
   const [popularMovies, setPopularMovies] = useState<MoviesResults | []>([])
   const [topMovies, setTopMovies] = useState<MoviesResults | []>([])
+
+  const navigation = useNavigation()
 
   async function getNowMovies() {
     await api
@@ -20,7 +25,9 @@ export default function Home() {
           api_key: key,
         },
       })
-      .then((response) => setNowMovies(response.data.results))
+      .then((response) => {
+        setNowMovies(response.data.results)
+      })
       .catch((error) => console.log(error))
   }
 
@@ -42,22 +49,43 @@ export default function Home() {
           api_key: key,
         },
       })
-      .then((response) => setTopMovies(response.data.results))
+      .then((response) => {
+        setTopMovies(response.data.results)
+        setLoading(false)
+      })
       .catch((error) => console.log(error))
   }
 
+  function handleMovie(item) {
+    navigation.navigate('Detail', {id: item.id})
+  }
+
   useEffect(() => {
-    getNowMovies()
-    getPopularMovies()
-    getTopMovies()
+    let isActive: boolean = true
+
+    const interval = setInterval(() => {
+      setBannerMovie(Math.floor(Math.random() * 19))
+    }, 5000)
+
+    if (isActive) {
+      getNowMovies()
+      getPopularMovies()
+      getTopMovies()
+    }
+
+    return () => {
+      isActive = false
+      clearInterval(interval)
+      new AbortController().abort()
+    }
   }, [])
 
-  if (
-    nowMovies === undefined ||
-    popularMovies === undefined ||
-    topMovies === undefined
-  ) {
-    return <HomeContainer>Loading...</HomeContainer>
+  if (loading) {
+    return (
+      <HomeContainer>
+        <ActivityIndicator size="large" color="#FBB034" />
+      </HomeContainer>
+    )
   } else {
     return (
       <HomeContainer>
@@ -65,11 +93,14 @@ export default function Home() {
         <SearchBar />
         <ScrollView showsVerticalScrollIndicator={false}>
           <Title>Em cartaz</Title>
-          <BannerButton activeOpacity={0.8}>
+          <BannerButton
+            activeOpacity={0.8}
+            onPress={() => handleMovie(nowMovies[bannerMovie])}
+          >
             <Banner
               resizeMethod="resize"
               source={{
-                uri: 'https://images.unsplash.com/photo-1521898461100-618454f89314?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
+                uri: `${imageURL}${nowMovies[bannerMovie].poster_path}`,
               }}
             />
           </BannerButton>
@@ -77,7 +108,9 @@ export default function Home() {
             showsHorizontalScrollIndicator={false}
             horizontal={true}
             data={nowMovies}
-            renderItem={({item}) => <SliderItem data={item} />}
+            renderItem={({item}) => (
+              <SliderItem data={item} handleMovie={() => handleMovie(item)} />
+            )}
             keyExtractor={(item) => String(item.id)}
           />
 
@@ -86,7 +119,9 @@ export default function Home() {
             showsHorizontalScrollIndicator={false}
             horizontal={true}
             data={popularMovies}
-            renderItem={({item}) => <SliderItem data={item} />}
+            renderItem={({item}) => (
+              <SliderItem data={item} handleMovie={() => handleMovie(item)} />
+            )}
             keyExtractor={(item) => String(item.id)}
           />
 
@@ -95,7 +130,9 @@ export default function Home() {
             showsHorizontalScrollIndicator={false}
             horizontal={true}
             data={topMovies}
-            renderItem={({item}) => <SliderItem data={item} />}
+            renderItem={({item}) => (
+              <SliderItem data={item} handleMovie={() => handleMovie(item)} />
+            )}
             keyExtractor={(item) => String(item.id)}
           />
         </ScrollView>

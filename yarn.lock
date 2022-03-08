@@ -4012,6 +4012,7 @@ __metadata:
     react-native-reanimated: ~2.2.0
     react-native-safe-area-context: ^3.3.2
     react-native-screens: ~3.8.0
+    react-native-stars: ^1.2.2
     react-native-svg: 12.1.1
     react-native-web: 0.17.5
     react-responsive: ^8.2.0
@@ -14682,6 +14683,13 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 405572a4d221936352984b93764ca65541bb2b92579b6a689b4b81175f8710e648ed2b23d8841450662e01cebbcf9adb2bc70ffd9ef454d7b0ae2781caeda9b1
+  languageName: node
+  linkType: hard
+
+"react-native-stars@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "react-native-stars@npm:1.2.2"
+  checksum: d6476e64797e61d41d496cbd56146cbf9a40247d7328416b91aba93b8bbf8db161a720a5ff55820871632c4dcba98c8110b7f323e43b616f0877821af792e37b
   languageName: node
   linkType: hard
 

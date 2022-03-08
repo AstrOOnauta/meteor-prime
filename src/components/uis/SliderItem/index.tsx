@@ -13,11 +13,15 @@ import {imageURL} from '../../../services/api'
 
 export interface SliderItemProps {
   data: MoviesResults
+  handleMovie: (item) => void
 }
 
 export default function SliderItem(props: SliderItemProps) {
   return (
-    <SliderItemContainer activeOpacity={0.8}>
+    <SliderItemContainer
+      activeOpacity={0.8}
+      onPress={() => props.handleMovie(props.data)}
+    >
       <BannerItem
         resizeMethod="resize"
         source={{
