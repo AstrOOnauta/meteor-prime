@@ -17,12 +17,14 @@ import {
 } from './style'
 import api, {imageURL, key} from '../../../services/api'
 import {MovieDetail} from 'types/movieDetail'
-import {ActivityIndicator, ScrollView} from 'react-native'
+import {ActivityIndicator, ScrollView, Modal} from 'react-native'
 import Genre from '../../../components/uis/Genre'
+import ModalLink from '../../../components/uis/ModalLink'
 
 export default function Detail() {
   const [loading, setLoading] = useState<boolean>(true)
   const [movie, setMovie] = useState<MovieDetail | undefined>(undefined)
+  const [openLink, setOpenLink] = useState<boolean>(false)
 
   const route = useRoute()
   const navigation = useNavigation()
@@ -80,7 +82,7 @@ export default function Detail() {
           resizeMethod="resize"
           source={{uri: `${imageURL}${movie.poster_path}`}}
         />
-        <ButtonLink activeOpacity={0.8}>
+        <ButtonLink activeOpacity={0.8} onPress={() => setOpenLink(!openLink)}>
           <Feather name="link" size={28} color="#FFF" />
         </ButtonLink>
         <Title numberOfLines={2}>{movie.title}</Title>
@@ -112,6 +114,17 @@ export default function Detail() {
         <ScrollView>
           <Description>{movie.overview}</Description>
         </ScrollView>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={openLink === true}
+        >
+          <ModalLink
+            link={movie.homepage}
+            title={movie.title}
+            closeModal={setOpenLink}
+          />
+        </Modal>
       </DetailContainer>
     )
   }

@@ -53,6 +53,7 @@
     "react-native-stars": "^1.2.2",
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.5",
+    "react-native-webview": "11.13.0",
     "react-responsive": "^8.2.0",
     "sentry-expo": "^4.0.3",
     "styled-components": "^5.3.3"

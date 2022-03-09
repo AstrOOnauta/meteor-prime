@@ -4015,6 +4015,7 @@ __metadata:
     react-native-stars: ^1.2.2
     react-native-svg: 12.1.1
     react-native-web: 0.17.5
+    react-native-webview: 11.13.0
     react-responsive: ^8.2.0
     react-test-renderer: ^17.0.2
     sentry-expo: ^4.0.3
@@ -9589,7 +9590,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invariant@npm:^2.2.2, invariant@npm:^2.2.4":
+"invariant@npm:2.2.4, invariant@npm:^2.2.2, invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
   dependencies:
@@ -14721,6 +14722,18 @@ __metadata:
     react: ">=17.0.1"
     react-dom: ">=17.0.1"
   checksum: 548cbba9f8fd081a08d0d882f7db9f5cd38e9706f2261c3f296a8406b2455beba0e80b294b5d052a927b0b2dcfbd5af59a3441ae78a7d407feee59e2f9487232
+  languageName: node
+  linkType: hard
+
+"react-native-webview@npm:11.13.0":
+  version: 11.13.0
+  resolution: "react-native-webview@npm:11.13.0"
+  dependencies:
+    escape-string-regexp: 2.0.0
+    invariant: 2.2.4
+  peerDependencies:
+    react-native: ">=0.60"
+  checksum: 0e70cba3cb44be2802b6ee488a79e72095d5607c3cc82c837138477fdcd16daed06cc5e590d13e80135f1dd167cbc1fcd9acb1b1354e350dfec3d3c29ec76772
   languageName: node
   linkType: hard
 
