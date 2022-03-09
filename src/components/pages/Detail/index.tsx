@@ -110,7 +110,7 @@ export default function Detail() {
           keyExtractor={(item) => String(item.id)}
           renderItem={({item}) => <Genre data={item} />}
         />
-        <Title>Descrição</Title>
+        <Title>Description</Title>
         <ScrollView>
           <Description>{movie.overview}</Description>
         </ScrollView>

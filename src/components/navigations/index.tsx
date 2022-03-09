@@ -23,7 +23,7 @@ export default function Routes() {
         name="HomeDrawer"
         component={StackRoutes}
         options={{
-          title: 'Início',
+          title: 'Home',
           drawerIcon: ({focused, size, color}) => (
             <MaterialCommunityIcons
               name={focused ? 'movie-open' : 'movie-outline'}
@@ -37,7 +37,7 @@ export default function Routes() {
         name="Movies"
         component={Movies}
         options={{
-          title: 'Meus filmes',
+          title: 'My movies',
           drawerIcon: ({focused, size, color}) => (
             <MaterialCommunityIcons
               name={focused ? 'archive' : 'archive-outline'}

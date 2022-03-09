@@ -92,7 +92,7 @@ export default function Home() {
         <Header />
         <SearchBar />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Title>Em cartaz</Title>
+          <Title>Now playing</Title>
           <BannerButton
             activeOpacity={0.8}
             onPress={() => handleMovie(nowMovies[bannerMovie])}
@@ -100,7 +100,7 @@ export default function Home() {
             <Banner
               resizeMethod="resize"
               source={{
-                uri: `${imageURL}${nowMovies[bannerMovie].poster_path}`,
+                uri: `${imageURL}${nowMovies[bannerMovie].backdrop_path}`,
               }}
             />
           </BannerButton>
@@ -114,7 +114,7 @@ export default function Home() {
             keyExtractor={(item) => String(item.id)}
           />
 
-          <Title>Populares</Title>
+          <Title>Popular</Title>
           <SliderMovies
             showsHorizontalScrollIndicator={false}
             horizontal={true}
@@ -125,7 +125,7 @@ export default function Home() {
             keyExtractor={(item) => String(item.id)}
           />
 
-          <Title>Mais votados</Title>
+          <Title>Top rated</Title>
           <SliderMovies
             showsHorizontalScrollIndicator={false}
             horizontal={true}
