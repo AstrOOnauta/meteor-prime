@@ -20,11 +20,13 @@ import {MovieDetail} from 'types/movieDetail'
 import {ActivityIndicator, ScrollView, Modal} from 'react-native'
 import Genre from '../../../components/uis/Genre'
 import ModalLink from '../../../components/uis/ModalLink'
+import {hasMovie, saveMovie} from '../../../utils/storage'
 
 export default function Detail() {
   const [loading, setLoading] = useState<boolean>(true)
   const [movie, setMovie] = useState<MovieDetail | undefined>(undefined)
   const [openLink, setOpenLink] = useState<boolean>(false)
+  const [isMyMovie, setIsMyMovie] = useState<boolean>(false)
 
   const route = useRoute()
   const navigation = useNavigation()
@@ -43,6 +45,12 @@ export default function Detail() {
       .catch((error) => console.log(error))
   }
 
+  async function getIsMyMovie() {
+    if (movie !== undefined) {
+      setIsMyMovie(await hasMovie(movie))
+    }
+  }
+
   useEffect(() => {
     let isActive: boolean = true
 
@@ -55,6 +63,10 @@ export default function Detail() {
       new AbortController().abort()
     }
   }, [])
+
+  useEffect(() => {
+    getIsMyMovie()
+  }, [movie])
 
   if (loading || movie === undefined) {
     return (
@@ -74,8 +86,18 @@ export default function Detail() {
           >
             <Feather name="arrow-left" size={28} color="#fbb034" />
           </HeaderButton>
-          <HeaderButton activeOpacity={0.8}>
-            <Ionicons name="bookmark" size={28} color="#fbb034" />
+          <HeaderButton
+            activeOpacity={0.8}
+            onPress={async () => {
+              await saveMovie(movie)
+              getIsMyMovie()
+            }}
+          >
+            <Ionicons
+              name={isMyMovie ? 'bookmark' : 'bookmark-outline'}
+              size={28}
+              color="#fbb034"
+            />
           </HeaderButton>
         </Header>
         <Banner

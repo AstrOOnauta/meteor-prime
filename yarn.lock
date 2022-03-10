@@ -2657,14 +2657,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-async-storage/async-storage@npm:~1.15.13":
-  version: 1.15.14
-  resolution: "@react-native-async-storage/async-storage@npm:1.15.14"
+"@react-native-async-storage/async-storage@npm:~1.15.0":
+  version: 1.15.17
+  resolution: "@react-native-async-storage/async-storage@npm:1.15.17"
   dependencies:
     merge-options: ^3.0.4
   peerDependencies:
-    react-native: ^0.0.0-0 || ^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || ^0.65.0 || ^0.66.0 || 1000.0.0
-  checksum: 1209ba1e4ea4faa2909be133cf647a64200ce9d03a3b42306e4be568f2a8fdf01fa60ba106459f98ae4bf07dd136bf97faed0498da1df76b7ca017936b7d2ba2
+    react-native: ^0.0.0-0 || 0.60 - 0.67 || 1000.0.0
+  checksum: 4c3dd30f6969bdcb2a5cafd82a8751e69f1c2c48f226c95f389b61246f19645229c178da35147310eee8b17f0f55d64ce3820101fc6f494cd6720cd69b9ad87f
   languageName: node
   linkType: hard
 
@@ -3965,7 +3965,7 @@ __metadata:
     "@expo/metro-config": ^0.3.2
     "@expo/vector-icons": ^12.0.5
     "@expo/webpack-config": ^0.16.9
-    "@react-native-async-storage/async-storage": ~1.15.13
+    "@react-native-async-storage/async-storage": ~1.15.0
     "@react-native-masked-view/masked-view": ~0.2.5
     "@react-navigation/bottom-tabs": ^6.0.9
     "@react-navigation/core": ^6.1.0
