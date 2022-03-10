@@ -77,76 +77,79 @@ export default function Detail() {
   } else {
     return (
       <DetailContainer>
-        <Header>
-          <HeaderButton
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Header>
+            <HeaderButton
+              activeOpacity={0.8}
+              onPress={() => {
+                navigation.goBack()
+              }}
+            >
+              <Feather name="arrow-left" size={28} color="#fbb034" />
+            </HeaderButton>
+            <HeaderButton
+              activeOpacity={0.8}
+              onPress={async () => {
+                await saveMovie(movie)
+                getIsMyMovie()
+              }}
+            >
+              <Ionicons
+                name={isMyMovie ? 'bookmark' : 'bookmark-outline'}
+                size={28}
+                color="#fbb034"
+              />
+            </HeaderButton>
+          </Header>
+          <Banner
+            resizeMethod="resize"
+            source={{uri: `${imageURL}${movie.poster_path}`}}
+          />
+          <ButtonLink
             activeOpacity={0.8}
-            onPress={() => {
-              navigation.goBack()
-            }}
+            onPress={() => setOpenLink(!openLink)}
           >
-            <Feather name="arrow-left" size={28} color="#fbb034" />
-          </HeaderButton>
-          <HeaderButton
-            activeOpacity={0.8}
-            onPress={async () => {
-              await saveMovie(movie)
-              getIsMyMovie()
-            }}
-          >
-            <Ionicons
-              name={isMyMovie ? 'bookmark' : 'bookmark-outline'}
-              size={28}
-              color="#fbb034"
+            <Feather name="link" size={28} color="#FFF" />
+          </ButtonLink>
+          <Title numberOfLines={2}>{movie.title}</Title>
+          <StarsContainer>
+            <Stars
+              default={movie.vote_average}
+              count={10}
+              half={true}
+              starSize={20}
+              fullStar={<Ionicons name="md-star" size={24} color="#FFCD3C" />}
+              emptyStar={
+                <Ionicons name="md-star-outline" size={24} color="#FFCD3C" />
+              }
+              halfStar={
+                <Ionicons name="md-star-half" size={24} color="#FFCD3C" />
+              }
+              disable={true}
             />
-          </HeaderButton>
-        </Header>
-        <Banner
-          resizeMethod="resize"
-          source={{uri: `${imageURL}${movie.poster_path}`}}
-        />
-        <ButtonLink activeOpacity={0.8} onPress={() => setOpenLink(!openLink)}>
-          <Feather name="link" size={28} color="#FFF" />
-        </ButtonLink>
-        <Title numberOfLines={2}>{movie.title}</Title>
-        <StarsContainer>
-          <Stars
-            default={movie.vote_average}
-            count={10}
-            half={true}
-            starSize={20}
-            fullStar={<Ionicons name="md-star" size={24} color="#FFCD3C" />}
-            emptyStar={
-              <Ionicons name="md-star-outline" size={24} color="#FFCD3C" />
-            }
-            halfStar={
-              <Ionicons name="md-star-half" size={24} color="#FFCD3C" />
-            }
-            disable={true}
+            <Rate>{movie.vote_average}/10</Rate>
+          </StarsContainer>
+          <ListGenres
+            data={movie?.genres}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({item}) => <Genre data={item} />}
           />
-          <Rate>{movie.vote_average}/10</Rate>
-        </StarsContainer>
-        <ListGenres
-          data={movie?.genres}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={({item}) => <Genre data={item} />}
-        />
-        <Title>Description</Title>
-        <ScrollView>
+          <Title>Description</Title>
           <Description>{movie.overview}</Description>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={openLink === true}
+          >
+            <ModalLink
+              link={movie.homepage}
+              title={movie.title}
+              closeModal={setOpenLink}
+            />
+          </Modal>
         </ScrollView>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={openLink === true}
-        >
-          <ModalLink
-            link={movie.homepage}
-            title={movie.title}
-            closeModal={setOpenLink}
-          />
-        </Modal>
       </DetailContainer>
     )
   }

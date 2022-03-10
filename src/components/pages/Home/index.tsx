@@ -89,7 +89,7 @@ export default function Home() {
   } else {
     return (
       <HomeContainer>
-        <Header />
+        <Header title={'Meteor Prime'} />
         <SearchBar />
         <ScrollView showsVerticalScrollIndicator={false}>
           <Title>Now playing</Title>

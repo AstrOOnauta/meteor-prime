@@ -4,7 +4,11 @@ import {useNavigation} from '@react-navigation/native'
 
 import {HeaderContainer, MenuButton, Title} from './style'
 
-export default function Header() {
+export interface HeaderProps {
+  title: string
+}
+
+export default function Header(props: HeaderProps) {
   const navigation = useNavigation()
 
   return (
@@ -12,7 +16,7 @@ export default function Header() {
       <MenuButton onPress={() => navigation.openDrawer()}>
         <Feather name="menu" size={36} color="#fbb034" />
       </MenuButton>
-      <Title>Meteor Prime</Title>
+      <Title>{props.title}</Title>
     </HeaderContainer>
   )
 }
