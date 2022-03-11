@@ -49,11 +49,13 @@ export default function Movies() {
             />
             <View>
               <Text
+                numberOfLines={1}
                 style={{
                   color: '#fbb034',
                   fontSize: 24,
                   fontWeight: 'bold',
                   marginBottom: 8,
+                  width: 240,
                 }}
               >
                 {item.title}
