@@ -6,7 +6,7 @@ Aplicativo para smartphone (Android & IOS) de consulta de filmes (e animações)
 📺 Preview:
 <div align = "center">
   
-<img src="https://github.com/AstrOOnauta/meteorprime/blob/main/preview.gif?raw=true">
+<img src="https://github.com/AstrOOnauta/meteor-prime/blob/main/preview.gif?raw=true">
  
 </div>
 <hr>
@@ -31,7 +31,7 @@ Aplicativo para smartphone (Android & IOS) de consulta de filmes (e animações)
 ## Instalação
 
     - Clonar repositorio
-    $ git clone https://github.com/AstrOOnauta/meteorprime.git
+    $ git clone https://github.com/AstrOOnauta/meteor-prime.git
 
     - Instalar dependências
     $ yarn
